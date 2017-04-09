@@ -1,10 +1,10 @@
-import Promise from 'pinkie';
-import TestCafe from './testcafe';
-import * as endpointUtils from 'endpoint-utils';
-import { GeneralError } from './errors/runtime';
-import MESSAGE from './errors/runtime/message';
-import embeddingUtils from './embedding-utils';
-import exportableLib from './api/exportable-lib';
+import Promise from "pinkie";
+import TestCafe from "./testcafe";
+import * as endpointUtils from "endpoint-utils";
+import {GeneralError} from "./errors/runtime";
+import MESSAGE from "./errors/runtime/message";
+import embeddingUtils from "./embedding-utils";
+import exportableLib from "./api/exportable-lib";
 
 
 // Validations
@@ -37,7 +37,7 @@ async function getValidPort (port) {
 // API
 async function createTestCafe (hostname, port1, port2) {
     [hostname, port1, port2] = await Promise.all([
-        getValidHostname(hostname),
+        hostname,
         getValidPort(port1),
         getValidPort(port2)
     ]);
