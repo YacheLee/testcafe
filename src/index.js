@@ -9,6 +9,15 @@ import exportableLib from './api/exportable-lib';
 
 // Validations
 async function getValidHostname (hostname) {
+    if (hostname) {
+        var valid = await endpointUtils.isMyHostname(hostname);
+
+        if (!valid)
+            throw new GeneralError(MESSAGE.invalidHostname, hostname);
+    }
+    else
+        hostname = endpointUtils.getIPAddress();
+
     return hostname;
 }
 
