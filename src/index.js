@@ -1,23 +1,14 @@
-import Promise from "pinkie";
-import TestCafe from "./testcafe";
-import * as endpointUtils from "endpoint-utils";
-import {GeneralError} from "./errors/runtime";
-import MESSAGE from "./errors/runtime/message";
-import embeddingUtils from "./embedding-utils";
-import exportableLib from "./api/exportable-lib";
+import Promise from 'pinkie';
+import TestCafe from './testcafe';
+import * as endpointUtils from 'endpoint-utils';
+import {GeneralError} from './errors/runtime';
+import MESSAGE from './errors/runtime/message';
+import embeddingUtils from './embedding-utils';
+import exportableLib from './api/exportable-lib';
 
 
 // Validations
 async function getValidHostname (hostname) {
-    if (hostname) {
-        var valid = await endpointUtils.isMyHostname(hostname);
-
-        if (!valid)
-            throw new GeneralError(MESSAGE.invalidHostname, hostname);
-    }
-    else
-        hostname = endpointUtils.getIPAddress();
-
     return hostname;
 }
 
@@ -37,7 +28,7 @@ async function getValidPort (port) {
 // API
 async function createTestCafe (hostname, port1, port2) {
     [hostname, port1, port2] = await Promise.all([
-        hostname,
+        getValidHostname(hostname),
         getValidPort(port1),
         getValidPort(port2)
     ]);
